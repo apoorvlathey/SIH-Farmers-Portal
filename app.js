@@ -61,61 +61,10 @@ app.get("/",function(req,res){
   res.render("index");
 });
 
-app.get("/about",function(req,res){
-  res.render("about");
-});
-app.get("/shop",function(req,res){
-  res.render("shop");
-});
-
-app.get("/wishlist",function(req,res){
-  res.render("wishlist");
-});
-
-app.get("/about",function(req,res){
-  res.render("about");
-});
-
-app.get("/blog",function(req,res){
-  res.render("blog");
-});
-
-app.get("/buyerregister",function(req,res){
-  res.render("buyerregister");
-});
-
-app.get("/farmerregister",function(req,res){
-  res.render("farmerregister");
-});
-
-app.get("/login", function(req,res){
-  res.render("login");
-});
-
-
-
-
-app.get("/contact",function(req,res){
-  res.render("contact");
-});
-
-app.get("/product-single",function(req,res){
-  res.render("product-single");
-});
-
-
-app.get("/cart",function(req,res){
-  res.render("cart");
-});
-
-
-app.get("/checkout",function(req,res){
-  res.render("checkout");
-});
-
-app.get("/register",function(req,res){
-  res.render("register");
+app.get('/:id' , (req , res)=>{
+  res.render(req.params.id);
 })
+
 
 app.post("/buyerregister",function(req,res){
   var u=req.body.email;
