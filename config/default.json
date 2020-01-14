@@ -1,0 +1,6 @@
+{
+    "jwtPrivateKey" : "unsecureKey",
+    "db" : "mongodb://localhost/SIH",
+    "port":"3100",
+    "requiresAuth" : true
+}

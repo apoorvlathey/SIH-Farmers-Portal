@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
-
+const auth  = require('./services/auth');
 
 const request=require("request");
 const app=express();
@@ -134,7 +134,7 @@ app.post("/register",function(req,res){
 
 
 
-app.post("/login",function(req,res){
+app.post("/login", auth , function(req,res){
 var t=req.body.aadhar;
 Buyer.findOne({aadhar: t},function(err, foundBuyers){
     if(err)
