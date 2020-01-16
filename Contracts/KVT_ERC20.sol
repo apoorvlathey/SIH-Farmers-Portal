@@ -2,6 +2,7 @@ pragma solidity ^0.4.24;
 
 contract owned {
     address public owner;
+    address public biddingContractAddress;
     
     constructor () {
         owner = msg.sender;
@@ -14,6 +15,10 @@ contract owned {
     
     function transerOwnership (address newOwner) onlyOwner {
         owner = newOwner;
+    }
+    
+    function setContractAddress(address _contractAddress) onlyOwner {
+        biddingContractAddress = _contractAddress;
     }
 }
 
@@ -42,7 +47,7 @@ contract KVT is owned {
         require(balanceOf[_from] >= _value);
         require(balanceOf[_to] + _value >= balanceOf[_to]); //to prevent overflow
         
-        balanceOf[msg.sender] -= _value;
+        balanceOf[_from] -= _value;
         balanceOf[_to] += _value;
         emit Transfer(_from, _to, _value);
     }
@@ -53,8 +58,11 @@ contract KVT is owned {
     }
     
     function transferFrom (address _from, address _to, uint256 _value) public returns (bool success) {
-        require(_value <= allowance[_from][msg.sender]); //compare how much tokens sender is allowed to spend.
-        allowance[_from][msg.sender] -= _value;
+        //bypass allowance check for BiddingContract
+        if(msg.sender != biddingContractAddress) {
+            require(_value <= allowance[_from][msg.sender]); //compare how much tokens sender is allowed to spend.
+            allowance[_from][msg.sender] -= _value;
+        }
         _transfer(_from, _to, _value);
         return true;
     }
