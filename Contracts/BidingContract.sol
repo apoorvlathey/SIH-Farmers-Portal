@@ -1,12 +1,12 @@
 pragma solidity ^0.5.12;
 
-import "./OpenZeppelin/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 
 contract Bidding {
     address public owner;
     
     ERC20 public ERC20Interface;        //To interact with ERC20 token contract
-    address tokenContractAddress = 0x692a70D2e424a56D2C6C27aA97D1a86395877b3A;
+    address tokenContractAddress;
     
     enum auctionState {Created, BiddingStarted, Ended}
     uint endTimeIncrement = 1 * (60*60);     // 1 hour
@@ -30,10 +30,11 @@ contract Bidding {
     auction[] public auctions;
     
     mapping(uint => uint[]) public farmerAuctions;
-    mapping(uint => mapping(address => uint)) buyerBids;   // buyerBids[AuctionId][BuyerAddress] == BuyerTotalBidAmt
+    mapping(uint => mapping(address => uint)) public buyerBids;   // buyerBids[AuctionId][BuyerAddress] == BuyerTotalBidAmt
     
-    constructor() public {
+    constructor(address _tokenContractAddress) public {
         owner = msg.sender;
+        tokenContractAddress = _tokenContractAddress;
         ERC20Interface = ERC20(tokenContractAddress);
     }
     
@@ -91,12 +92,26 @@ contract Bidding {
         return auctions[_auctionId].highestBid;
     }
     
+    function withdrawTokensAfterAuctionEnded(uint _auctionId) public {
+        require(buyerBids[_auctionId][msg.sender] > 0);
+        if(now > auctions[_auctionId].endTime && auctions[_auctionId].state == auctionState.BiddingStarted) {
+            auctions[_auctionId].state = auctionState.Ended;
+        }
+        require(auctions[_auctionId].state == auctionState.Ended);
+        require(auctions[_auctionId].highestBidder != msg.sender);      //buyers that lost can only withdraw
+        ERC20Interface.transferFrom(address(this), msg.sender, buyerBids[_auctionId][msg.sender]);
+    }
+    
+    function tranferContractTokens(address _to, uint _amt) public onlyOwner {
+        ERC20Interface.transferFrom(address(this), _to, _amt);
+    }
+    
     modifier onlyOwner {
         require(msg.sender == owner);
         _;
     }
     
-    function transerOwnership (address newOwner) public onlyOwner {
+    function transferOwnership (address newOwner) public onlyOwner {
         owner = newOwner;
     }
 }
