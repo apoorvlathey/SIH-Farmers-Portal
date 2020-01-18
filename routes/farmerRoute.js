@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   const data = { name: req.body.name, aadharnumber: encryptedAadhar };
   const newuser = new farmer(data);
   await newuser.save();
-  const token = user.generateAuthToken();
+  const token = jwt.sign({ id: newuser._id }, config.get('jwtPrivateKey'));
   res
     .header('x-auth-token', token)
     .header('access-control-expose-headers', 'x-auth-token')

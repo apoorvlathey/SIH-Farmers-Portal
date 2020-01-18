@@ -4,12 +4,12 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const auth = require('./services/auth');
 const farmerRoute = require('./routes/farmerRoute');
-const request = require('request');
 const app = express();
-const buyerSchema = require('./models/buyerSchema');
-const FarmerSchema = require('./models/farmerSchema');
+const Buyer = require('./models/buyerSchema');
+const Farmer = require('./models/farmerSchema');
 const buyerRoute = require('./routes/buyersRoute');
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -19,8 +19,6 @@ mongoose.connect('mongodb://localhost:27017/sihDB', {
   useNewUrlParser: true,
   useCreateIndex: true,
 });
-const Buyer = mongoose.model('Buyer', BuyerSchema);
-const Farmer = mongoose.model('Farmer', FarmerSchema);
 
 const CropSchema = new mongoose.Schema({
   email: { type: String, require: true, unique: true },
@@ -43,7 +41,7 @@ app.use('/farmerregister', farmerRoute);
 
 app.post('/register', function(req, res) {
   var t = req.body.type;
-  console.log(t);
+  console.log(req.body);
   if (t == 'farmer') res.redirect('/farmerregister');
   else {
     res.redirect('/buyerregister');
@@ -51,6 +49,7 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/login', auth, function(req, res) {
+  console.log(req.body);
   var t = req.body.aadhar;
   Buyer.findOne({ aadhar: t }, function(err, foundBuyers) {
     if (err) {
