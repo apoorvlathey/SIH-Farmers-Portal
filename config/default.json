@@ -1,6 +1,8 @@
 {
-    "jwtPrivateKey" : "unsecureKey",
-    "db" : "mongodb://localhost/SIH",
-    "port":"3100",
-    "requiresAuth" : true
+  "jwtPrivateKey": "unsecureKey",
+  "db": "mongodb://localhost/SIH",
+  "port": "3100",
+  "requiresAuth": true,
+  "TWILIO_ACCOUNT_SID": "AC9b1d737e19c74aae50690860521d72bf",
+  "TWILIO_AUTH_TOKEN": "cf6236bde694ba2f49374f46284e3873"
 }
