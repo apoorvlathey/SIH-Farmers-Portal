@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
   console.log(buyer);
+  console.log(req.body);
   try {
     const user = await buyer.findOne({ name: req.body.name });
     const salt = await bcrypt.genSalt(10);
