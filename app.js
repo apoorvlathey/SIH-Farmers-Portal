@@ -17,8 +17,10 @@ mongoose.connect('mongodb://localhost:27017/sihDB', {useUnifiedTopology: true, u
 
 const BuyerSchema= new mongoose.Schema ({
   email : {type:String,require:true,unique:true},
-  password: {type:String,require:true,unique:true},
-  type:String,
+  password: {type:String,require:true},
+  adharnumber: {type:String,require:true,unique:true},
+
+//  type:String,
   // googleId: String,
 
 
@@ -29,8 +31,15 @@ const Buyer=mongoose.model("Buyer", BuyerSchema);
 
 
 const FarmerSchema= new mongoose.Schema ({
-  name : {type:String,require:true,unique:true},
+ name : {type:String,require:true},
   adharnumber: {type:String,require:true,unique:true},
+  password: {type:String,require:true},
+  crop:[{
+    name: String,
+    quantity:String,
+    price: String,
+
+  }],
   //type:String,
   // googleId: String,
 
@@ -40,15 +49,194 @@ const FarmerSchema= new mongoose.Schema ({
 
 const Farmer=mongoose.model("Farmer", FarmerSchema);
 
+const CropSchema= new mongoose.Schema ({
+  email : {type:String,require:true,unique:true},
+  password: {type:String,require:true},
+//  type:String,
+  // googleId: String,
+
+
+});
+
 app.get("/",function(req,res){
-  res.render("register");
+  res.render("index");
+});
+
+app.get("/about",function(req,res){
+  res.render("about");
+});
+app.get("/shop",function(req,res){
+  res.render("shop");
+});
+
+app.get("/wishlist",function(req,res){
+  res.render("wishlist");
+});
+
+app.get("/about",function(req,res){
+  res.render("about");
+});
+
+app.get("/blog",function(req,res){
+  res.render("blog");
+});
+
+app.get("/buyerregister",function(req,res){
+  res.render("buyerregister");
+});
+
+app.get("/farmerregister",function(req,res){
+  res.render("farmerregister");
+});
+
+app.get("/login", function(req,res){
+  res.render("login");
 });
 
 
 
 
+app.get("/contact",function(req,res){
+  res.render("contact");
+});
+
+app.get("/product-single",function(req,res){
+  res.render("product-single");
+});
 
 
+app.get("/cart",function(req,res){
+  res.render("cart");
+});
+
+
+app.get("/checkout",function(req,res){
+  res.render("checkout");
+});
+
+app.get("/register",function(req,res){
+  res.render("register");
+});
+
+app.get("/:url",function(req,res){
+  var t=req.params.url;
+  console.log(t);
+})
+
+app.post("/buyerregister",function(req,res){
+  var u=req.body.email;
+  const buy=new Buyer({
+
+    email: req.body.email,
+    password:req.body.password,
+      adharnumber:req.body.aadhar,
+  });
+  Buyer.findOne({email: u},function(err, foundBuyers){
+if(!err){
+      if(!foundBuyers)
+      {
+        buy.save(function(err){
+          if(err)
+        //  console.log("error in saving");
+          console.log(err);
+          else {
+            //console.log(user);
+          //  console.log(pass);
+            console.log("Inserted successfuly to buyer database");
+       res.redirect("/");
+          }
+        });
+      }
+    }
+  });
+});
+
+
+  app.post("/farmerregister",function(req,res){
+    var u=req.body.aadhar;
+    const farm=new Farmer({
+
+      name: req.body.name,
+      password:req.body.password,
+      adharnumber:req.body.aadhar,
+    });
+    Farmer.findOne({adharnumber: u},function(err, foundFarmers){
+  if(!err){
+        if(!foundFarmers)
+        {
+          farm.save(function(err){
+            if(err)
+          //  console.log("error in saving");
+            console.log(err);
+            else {
+              //console.log(user);
+            //  console.log(pass);
+              console.log("Inserted successfuly to seller database");
+              res.redirect(/foundFarmers._id);
+            }
+          });
+        }
+      }
+    });
+  });
+
+
+
+
+app.post("/register",function(req,res){
+  var t=req.body.type;
+  console.log(t);
+  if(t=="farmer")
+  res.redirect("/farmerregister");
+  else {
+    res.redirect("/buyerregister");
+  }
+});
+
+
+
+app.post("/login",function(req,res){
+var t=req.body.aadhar;
+Buyer.findOne({adharnumber: t,password: req.body.password},function(err, foundBuyers){
+    if(err)
+    {
+    console.log(err);
+    res.send(err);
+  }
+    else {
+      if(!foundBuyers)
+    {
+      console.log("No Buyer Exist.Lets find from Farmers");
+      Farmer.findOne({adharnumber: t},function(err, foundFarmers){
+          if(err)
+          {
+          console.log(err);
+          res.send(err);
+        }
+          else {
+            if(!foundFarmers)
+          {
+          console.log("No Buyer And Farmer Exist");
+          res.render("register");
+        }
+            else {
+            //  console.log(foundClass.title);
+          console.log("Seller");
+               res.render("about");
+            }
+
+          }
+        });
+      }
+      else {
+      //  console.log(foundClass.title);
+      console.log("Buyer");
+         res.render("shop" );
+      }
+
+    }
+  });
+});
 
 
 
