@@ -8,6 +8,7 @@ const app = express();
 const Buyer = require('./models/buyerSchema');
 const Farmer = require('./models/farmerSchema');
 const buyerRoute = require('./routes/buyersRoute');
+const cropUpdation = require('./routes/cropUpdation');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,24 +21,18 @@ mongoose.connect('mongodb://localhost:27017/sihDB', {
   useCreateIndex: true,
 });
 
-const CropSchema = new mongoose.Schema({
-  email: { type: String, require: true, unique: true },
-  password: { type: String, require: true },
-  //  type:String,
-  // googleId: String,
-});
-
 app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.get('/:id', (req, res) => {
-  res.render(req.params.id);
-});
+app.use('/farmerCrop', cropUpdation);
 
 app.use('/buyerregister', buyerRoute);
 
 app.use('/farmerregister', farmerRoute);
+app.get('/:id', (req, res) => {
+  res.render(req.params.id);
+});
 
 app.post('/register', function(req, res) {
   var t = req.body.type;

@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form </title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <script src="https://apis.google.com/js/api:client.js"></script>
-    	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-                      <!-- CUSTOM STYLES -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign Up Form</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- CUSTOM STYLES -->
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+    ></script>
     <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link
+      rel="stylesheet"
+      href="fonts/material-icon/css/material-design-iconic-font.min.css"
+    />
 
     <!-- Main css -->
-        <link rel="stylesheet" href="css/bootstrap-social.css">
-    <link rel="stylesheet" href="css/styleo.css">
-
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/bootstrap-social.css" />
+    <link rel="stylesheet" href="css/styleo.css" />
+    <script src="/js/auth.js"></script>
+  </head>
+  <body>
     <div class="main">
-        <div class="container">
-            <div class="signup-content">
-                <div class="signup-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKgG6XCJjLFooEKdwOyKa4UTHC_miMPGD96zFrGM2vmLufXNt&s" alt="" style="width:100%">
+      <div class="container">
+        <div class="signup-content">
+          <div class="signup-img">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKgG6XCJjLFooEKdwOyKa4UTHC_miMPGD96zFrGM2vmLufXNt&s"
+              alt=""
+              style="width:100%"
+            />
+          </div>
+          <div class="signup-form">
+            <form
+              method="POST"
+              class="register-form"
+              id="register-form"
+              onsubmit="auth(e)"
+            >
+              <h2>Registration form</h2>
+              <div class="form-row">
+                <div></div>
+                <div class="form-group">
+                  <label for="name">Name :</label>
+                  <input type="text" name="name" id="name" required />
                 </div>
-                <div class="signup-form">
-                    <form method="POST" action="/buyerregister" class="register-form" id="register-form">
-                        <h2>Registration form</h2>
-                        <div class="form-row">
-                          <div >
-                          </div>
-                            <div class="form-group">
-                                <label for="name">Name :</label>
-                                <input type="text" name="name" id="name" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="aadhar">Aadhar Number :</label>
-                                <input type="number" name="aadhar" id="name" required/>
-                            </div>
+                <div class="form-group">
+                  <label for="aadhar">Aadhar Number :</label>
+                  <input type="number" name="aadhar" id="name" required />
+                </div>
+              </div>
 
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="email">Email ID :</label>
-                            <input type="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password :</label>
-                            <input type="password" name="password">
-                        </div>
-                        <div class="form-submit">
-                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
-                        </div>
-                        <!-- <div class="card" style="margin-top:10px">
+              <div class="form-group">
+                <label for="email">Email ID :</label>
+                <input type="email" name="email" />
+              </div>
+              <div class="form-group">
+                <label for="password">Password :</label>
+                <input type="password" name="password" />
+              </div>
+              <div class="form-submit">
+                <input
+                  type="submit"
+                  value="Submit Form"
+                  class="submit"
+                  name="submit"
+                  id="submit"
+                />
+              </div>
+              <!-- <div class="card" style="margin-top:10px">
                               <div class="card-body">
                                 <a class="btn btn-block btn-social btn-google "  href="/auth/google" role="button">
                                   <i class="fab fa-google"></i>
@@ -64,17 +95,15 @@
                                 </a>
                               </div>
                             </div></div> -->
-                    </form>
-
-                </div>
-
-            </div>
+            </form>
+          </div>
         </div>
-
+      </div>
     </div>
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  </body>
+  <!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
