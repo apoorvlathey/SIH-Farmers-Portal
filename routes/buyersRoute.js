@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, salt);
     const data = {
       name: req.body.name,
+      aadhar:req.body.aadhar,
       password: encryptedPassword,
       email: req.body.email,
     };
