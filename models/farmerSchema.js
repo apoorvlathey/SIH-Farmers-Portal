@@ -6,8 +6,8 @@ const FarmerSchema = new mongoose.Schema({
   crop: [
     {
       name: String,
-      quantity: String,
-      price: String,
+      quantity: Number,
+      price: Number,
     },
   ],
   //type:String,

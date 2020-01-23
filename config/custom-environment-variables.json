@@ -1,3 +1,5 @@
 {
-    "jwtPrivateKey" : "kisanSIH"
+  "jwtPrivateKey": "kisanSIH",
+  "TWILIO_ACCOUNT_SID": "twilioSID",
+  "TWILIO_AUTH_TOKEN": "cf6236bde694ba2f49374f46284e3873"
 }
