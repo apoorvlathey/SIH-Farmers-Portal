@@ -18,11 +18,12 @@ paypal.Button.render(
     commit: true,
     // Set up a payment
     payment: function(data, actions) {
+      console.log(typeof parseInt(document.getElementById('amount').innerHTML));
       return actions.payment.create({
         transactions: [
           {
             amount: {
-              total: document.getElementById('amount').value,
+              total: parseInt(document.getElementById('amount').innerHTML),
               currency: 'USD',
             },
           },
