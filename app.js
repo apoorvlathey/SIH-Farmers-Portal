@@ -36,7 +36,6 @@ app.get("/update",function(req,res){
 app.use('/farmerCrop', cropUpdation);
 
 app.use('/buyerregister', buyerRoute);
-
 app.use('/farmerregister', farmerRoute);
 app.get('/:id', (req, res) => {
   res.render(req.params.id);
