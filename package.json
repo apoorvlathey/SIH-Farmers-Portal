@@ -12,7 +12,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.4",
     "nodemon": "^2.0.2",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "twilio": "^3.39.3"
   },
   "devDependencies": {},
   "scripts": {

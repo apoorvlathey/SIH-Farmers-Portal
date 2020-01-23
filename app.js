@@ -9,6 +9,7 @@ const Buyer = require('./models/buyerSchema');
 const Farmer = require('./models/farmerSchema');
 const buyerRoute = require('./routes/buyersRoute');
 const cropUpdation = require('./routes/cropUpdation');
+const sms = require('./services/sms');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
