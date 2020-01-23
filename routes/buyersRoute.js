@@ -11,11 +11,11 @@ router.post('/', async (req, res) => {
   try {
     const user = await buyer.findOne({ name: req.body.name });
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+    // const encryptedPassword = await bcrypt.hash(req.body.password, salt);
     const data = {
       name: req.body.name,
-      aadhar:req.body.aadhar,
-      password: encryptedPassword,
+      aadhar: req.body.aadhar,
+      password: req.body.password,
       email: req.body.email,
     };
     const newuser = new buyer(data);
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     res
       .header('x-auth-token', token)
       .header('access-control-expose-headers', 'x-auth-token')
-      .send(user);
+      .send(newuser);
   } catch (e) {
     console.log(e);
   }
