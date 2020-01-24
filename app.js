@@ -59,7 +59,8 @@ app.get('/:id/:id2', (req, res) => {
     res.render(req.params.id, { ur: data, tyu: data });
   }
 });
-app.get('/:id', auth, async (req, res) => {
+
+app.get('/details', auth, async (req, res) => {
   console.log(req.body.aadharnumber);
   const foundFarmers = await Farmer.findOne({
     aadharnumber: req.body.aadharnumber,
@@ -68,6 +69,9 @@ app.get('/:id', auth, async (req, res) => {
   if (foundFarmers) {
     res.send(foundFarmers);
   }
+});
+
+app.get('/:id', (req, res) => {
   res.render(req.params.id);
 });
 
