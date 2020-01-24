@@ -4,16 +4,236 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
+  <title>Bidding</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/magnific-popup.css">
+
+  <link rel="stylesheet" href="/css/aos.css">
+
+  <link rel="stylesheet" href="/css/ionicons.min.css">
+
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/icomoon.css">
+  <link rel="stylesheet" href="/css/style.css">
+
   <script src="/js/web3.min.js"></script>
 
-  <script src="/js/jquery-3.2.1.min.js"></script>
+  <style>
+  .font-small {
+    font-size: 1.2em !important;
+  }
+  </style>
 
 </head>
 
-<body>
+<body class="goto-here">
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/">VegeMania</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
-  <input id="amt" type="text" placeholder="Enter Amount">
-  <button id="btn" type="submit">PLACE BID</button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="shop1" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Shop</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="shop">Shop</a>
+              <a class="dropdown-item" href="/wishlist">Wishlist</a>
+              <a class="dropdown-item" href="/product-single">Single Product</a>
+              <a class="dropdown-item" href="/cart">Cart</a>
+              <a class="dropdown-item" href="/checkout">Checkout</a>
+            </div>
+          </li>
+          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+          <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span
+                class="icon-shopping_cart"></span>[0]</a></li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          <!-- <p class="breadcrumbs"><span class="mr-2"><a href="/index">Home</a></span> <span class="mr-2"><a
+                href="index.html">Product</a></span> <span>Product Single</span></p> -->
+          <h1 class="mb-0 bread">Place Bidding</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-5 ftco-animate">
+          <a href="/images/product-5.jpg" class="image-popup"><img src="/images/product-5.jpg" class="img-fluid"
+              alt="Colorlib Template"></a>
+        </div>
+        <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+          <h3>Tomato</h3>
+
+          <p class="price">Highest Bid: <span class="font-small">₹ <span id="curr-price" class="font-small">80</span></span></p>
+          <p class="price">Highest Bidder: <span class="font-small" id="highest-bidder-addr">0xwhedfbj3ruehv</span></p>
+          <p>
+            Farmer Id: <span id="farmer-id"> 2 </span>
+          </p>
+          <p class="price">Time Left: <span id="time-left" class="font-small">00:09:16</span></p>
+          <p class="price">Auction Finally Ends: <span id="auction-ends" class="font-small">00:09:16</span></p>
+          <div class="row mt-4">
+            <div class="w-100"></div>
+            <div class="input-group col-md-8 d-flex mb-3">
+              <input type="text" id="amt" name="bid-amount" class="form-control input-number" value=""
+                placeholder="Enter Bid Amount">
+              <span class="input-group-btn ml-2">
+                <button id="btn" type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                  Place Bid
+                </button>
+              </span>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-12">
+              <!-- <p style="color: #000;">600 kg available</p> -->
+            </div>
+          </div>
+          <!-- <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ftco-footer ftco-section">
+    <div class="container">
+      <div class="row">
+        <div class="mouse">
+          <a href="#" class="mouse-icon">
+            <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+          </a>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Vegefoods</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Menu</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">Shop</a></li>
+              <li><a href="#" class="py-2 d-block">About</a></li>
+              <li><a href="#" class="py-2 d-block">Journal</a></li>
+              <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Help</h2>
+            <div class="d-flex">
+              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
+                <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
+                <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+              </ul>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">FAQs</a></li>
+                <li><a href="#" class="py-2 d-block">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">Thapar University,Patiala</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 6397089121</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span
+                      class="text">singhalharsh23@gmail.com</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved |
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" /></svg></div>
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.easing.1.3.js"></script>
+  <script src="/js/jquery.waypoints.min.js"></script>
+  <script src="/js/jquery.stellar.min.js"></script>
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/jquery.magnific-popup.min.js"></script>
+  <script src="/js/aos.js"></script>
+  <script src="/js/jquery.animateNumber.min.js"></script>
+  <script src="/js/bootstrap-datepicker.js"></script>
+  <script src="/js/scrollax.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/countdown.js"></script>
+
+
+
+
+  <!-- <input id="amt" type="text" placeholder="Enter Amount">
+  <button id="btn" type="submit">PLACE BID</button> -->
 
   <script>
     const GAS = 500000;
@@ -44,39 +264,79 @@
       console.log(web3.eth.defaultAccount)
     });
 
-    var BiddingContract = new web3.eth.Contract([{ "inputs": [{ "internalType": "address", "name": "_tokenContractAddress", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "AuctonId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "timeCreated", "type": "uint256" }], "name": "AuctionCreated", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "highestBidder", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "AuctionEndTime", "type": "uint256" }], "name": "BidPlaced", "type": "event" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "_basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "_cropId", "type": "uint256" }], "name": "newAuction", "outputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "_bidAmt", "type": "uint256" }], "name": "placeBid", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }], "name": "tranferContractTokens", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "withdrawTokensAfterAuctionEnded", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "auctions", "outputs": [{ "internalType": "uint256", "name": "auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "enum Bidding.auctionState", "name": "state", "type": "uint8" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "buyerBids", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "ERC20Interface", "outputs": [{ "internalType": "contract ERC20", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "farmerAuctions", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "getHighestBid", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }], '0xa6EB5e3512421209a24A38b6b487B5846321bB85');
-
-    BiddingContract.methods.auctions(0).call((err, res) => {
-      console.log(res);
-    });
-
-    var auctionId = <%= auctionId %>;
+    var auctionId = 0;
+      <% if (locals.auctionId != null) { %>
+        auctionId = <%= auctionId %>;
+      <% } %>
 
     $(document).ready(function () {
-      $("#btn").click(function () {
+      var BiddingContract = new web3.eth.Contract([{ "inputs": [{ "internalType": "address", "name": "_tokenContractAddress", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "AuctonId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "timeCreated", "type": "uint256" }], "name": "AuctionCreated", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "highestBidder", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "AuctionEndTime", "type": "uint256" }], "name": "BidPlaced", "type": "event" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "_basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "_cropId", "type": "uint256" }], "name": "newAuction", "outputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "_bidAmt", "type": "uint256" }], "name": "placeBid", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }], "name": "tranferContractTokens", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "withdrawTokensAfterAuctionEnded", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "auctions", "outputs": [{ "internalType": "uint256", "name": "auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "enum Bidding.auctionState", "name": "state", "type": "uint8" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "buyerBids", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "ERC20Interface", "outputs": [{ "internalType": "contract ERC20", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "farmerAuctions", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "getHighestBid", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }], '0xa6EB5e3512421209a24A38b6b487B5846321bB85');
 
-        var amt = $('#amt').val();;
+      BiddingContract.methods.auctions(auctionId).call((err, res) => {
+        console.log(res)
 
-        BiddingContract.methods.placeBid(auctionId, amt).send({ from: web3.eth.defaultAccount, value: 0, gas: GAS, gasPrice: GAS_PRICE })
-          .then(r => {
-            console.log(r);
-          }).catch(e => {
-            console.log("Error: " + e);
-          });
+        
+        if(res.state == 0){
+          $("#curr-price").text(res.basePricePerKg);
+          $("#highest-bidder-addr").text("Bidding Not Started")
+        }
+        else {
+          $("#curr-price").text(res.highestBid);
+          $("#highest-bidder-addr").text(res.highestBidder)
+        }
+        if(res.highestBidder == "0xA09aB1aBeCb91CaC38c3240912D2A1b31e22F147") {
+          $("#highest-bidder-addr").text("Anil Verma")
+        } else if(res.highestBidder == "0x038bCb5eDF4e069BfF32CFCd016ACB4B6d0ccC43") {
+          $("#highest-bidder-addr").text("Ram Kumar")
+        } else {
+          $("#highest-bidder-addr").text(res.highestBidder)
+        }
 
-        BiddingContract.events.BidPlaced({
-          filter: {address: web3.eth.defaultAccount}, // Using an array means OR: e.g. 20 or 23
-          fromBlock: 'latest'
-        }, function (error, event) { console.log(event); })
-          .on('data', function (event) {
-            //console.log(event); // same results as the optional callback above
-          })
-          .on('changed', function (event) {
-            // remove event from local database
-          })
-          .on('error', console.error);
+        $("#farmer-id").text(res.farmerId)
+        $("#auction-ends").text(timeConverter(parseInt(res.startTime) + 24*60*60))
 
-      })
+        let unix_timestamp = parseInt(res.endTime);
+        $("#time-left").countdown({
+          date: new Date(unix_timestamp*1000)
+        });
+      });
+
+      function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        return time;
+      }
+
+        $("#btn").click(function () {
+          var amt = $('#amt').val();
+
+          BiddingContract.methods.placeBid(auctionId, amt).send({ from: web3.eth.defaultAccount, value: 0, gas: GAS, gasPrice: GAS_PRICE })
+            .then(r => {
+              console.log(r);
+            }).catch(e => {
+              console.log("Error: " + e);
+            });
+
+          BiddingContract.events.BidPlaced({
+            filter: { address: web3.eth.defaultAccount }, // Using an array means OR: e.g. 20 or 23
+            fromBlock: 'latest'
+          }, function (error, event) { console.log(event); })
+            .on('data', function (event) {
+              //console.log(event); // same results as the optional callback above
+            })
+            .on('changed', function (event) {
+              // remove event from local database
+            })
+            .on('error', console.error);
+
+        })
     })
   </script>
 
