@@ -34,6 +34,12 @@ app.get('/:id', (req, res) => {
   res.render(req.params.id);
 });
 
+app.get('/bidding/:id', (req, res) => {
+  res.render('bidding', {
+    auctionId: req.params.id
+  })
+})
+
 app.post('/register', function(req, res) {
   var t = req.body.type;
   console.log(req.body);

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+  <script src="/js/web3.min.js"></script>
+
+  <script src="/js/jquery-3.2.1.min.js"></script>
+
+</head>
+
+<body>
+
+  <input id="amt" type="text" placeholder="Enter Amount">
+  <button id="btn" type="submit">PLACE BID</button>
+
+  <script>
+    const GAS = 500000;
+    const GAS_PRICE = "20000000000";
+
+    if (window.ethereum) {
+      window.web3 = new Web3(ethereum);
+      try {
+        // Request account access if needed
+        ethereum.enable();
+        // Acccounts now exposed
+      } catch (error) {
+        // User denied account access...
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      window.web3 = new Web3(web3.currentProvider);
+      // Acccounts always exposed
+    }
+    // Non-dapp browsers...
+    else {
+      console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+
+    web3.eth.getAccounts((err, res) => {
+      web3.eth.defaultAccount = res[0];
+      console.log(web3.eth.defaultAccount)
+    });
+
+    var BiddingContract = new web3.eth.Contract([{ "inputs": [{ "internalType": "address", "name": "_tokenContractAddress", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "AuctonId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "timeCreated", "type": "uint256" }], "name": "AuctionCreated", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "highestBidder", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "AuctionEndTime", "type": "uint256" }], "name": "BidPlaced", "type": "event" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "_basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "_cropId", "type": "uint256" }], "name": "newAuction", "outputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "_bidAmt", "type": "uint256" }], "name": "placeBid", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }], "name": "tranferContractTokens", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "withdrawTokensAfterAuctionEnded", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "auctions", "outputs": [{ "internalType": "uint256", "name": "auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "enum Bidding.auctionState", "name": "state", "type": "uint8" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "buyerBids", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "ERC20Interface", "outputs": [{ "internalType": "contract ERC20", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "farmerAuctions", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "getHighestBid", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }], '0xa6EB5e3512421209a24A38b6b487B5846321bB85');
+
+    BiddingContract.methods.auctions(0).call((err, res) => {
+      console.log(res);
+    });
+
+    var auctionId = <%= auctionId %>;
+
+    $(document).ready(function () {
+      $("#btn").click(function () {
+
+        var amt = $('#amt').val();;
+
+        BiddingContract.methods.placeBid(auctionId, amt).send({ from: web3.eth.defaultAccount, value: 0, gas: GAS, gasPrice: GAS_PRICE })
+          .then(r => {
+            console.log(r);
+          }).catch(e => {
+            console.log("Error: " + e);
+          });
+
+        BiddingContract.events.BidPlaced({
+          filter: {address: web3.eth.defaultAccount}, // Using an array means OR: e.g. 20 or 23
+          fromBlock: 'latest'
+        }, function (error, event) { console.log(event); })
+          .on('data', function (event) {
+            //console.log(event); // same results as the optional callback above
+          })
+          .on('changed', function (event) {
+            // remove event from local database
+          })
+          .on('error', console.error);
+
+      })
+    })
+  </script>
+
+</body>
+
+</html>
