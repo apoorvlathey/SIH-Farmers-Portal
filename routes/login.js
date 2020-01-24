@@ -5,7 +5,9 @@ const Buyer = require('../models/buyerSchema');
 const Farmer = require('../models/farmerSchema');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const url = require('url');
 
+let asd = 0;
 router.post('/', async (req, res) => {
   console.log(req.body.aadhar);
   var t = req.body.aadhar;
@@ -28,16 +30,16 @@ router.post('/', async (req, res) => {
             } else {
               //  console.log(foundClass.title);
               console.log(foundFarmers);
-              tin = foundFarmers;
+              asd = foundFarmers;
               const token = jwt.sign(
                 foundFarmers.name,
                 config.get('jwtPrivateKey')
               );
+
               res
                 .header('x-auth-token', token)
                 .header('access-control-expose-headers', 'x-auth-token')
-                .send('hello');
-              // .render('details', { ur: foundFarmers });
+                .send(foundFarmers);
             }
           }
         });
@@ -55,4 +57,11 @@ router.post('/', async (req, res) => {
   });
 });
 
+router.get('/', (req, res) => {
+  res.render('login');
+});
+
+router.get('/details', (req, res) => {
+  console.log(asd);
+});
 module.exports = router;

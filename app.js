@@ -46,10 +46,16 @@ app.get('/update', function(req, res) {
 app.use('/farmerCrop', cropUpdation);
 
 app.use('/login', login);
-
 app.use('/buyerregister', buyerRoute);
 app.use('/farmerregister', farmerRoute);
-app.get('/:id', (req, res) => {
+app.get('/:id/:id2', (req, res) => {
+  console.log(req.params.id2);
+  if (req.params.id2) {
+    const string = req.params.id2.substring(1);
+    console.log(string);
+    const data = JSON.parse(string);
+    res.render(req.params.id, { ur: data });
+  }
   res.render(req.params.id);
 });
 
@@ -90,6 +96,6 @@ app.post('/update', function(req, res) {
   res.render('details', { ur: foundFarmers });
 });
 
-app.listen(3000, function() {
+app.listen(3001, function() {
   console.log('Server is running on Port 3000');
 });
