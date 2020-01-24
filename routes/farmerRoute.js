@@ -17,4 +17,8 @@ router.post('/', async (req, res) => {
     .send(newuser);
 });
 
+router.get('/', (req, res) => {
+  res.render('farmerregister')
+})
+
 module.exports = router;
