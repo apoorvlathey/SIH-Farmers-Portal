@@ -59,6 +59,16 @@ app.get('/:id/:id2', (req, res) => {
   res.render(req.params.id);
 });
 
+app.get('/bidding/:id', (req, res) => {
+  res.render('bidding', {
+    auctionId: req.params.id
+  })
+})
+
+app.get('/register', (req, res) => {
+  res.render('register')
+})
+
 app.post('/register', function(req, res) {
   var t = req.body.type;
   console.log(req.body);
@@ -97,5 +107,5 @@ app.post('/update', function(req, res) {
 });
 
 app.listen(3001, function() {
-  console.log('Server is running on Port 3000');
+  console.log('Server is running on Port 3001');
 });

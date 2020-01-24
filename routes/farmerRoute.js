@@ -6,7 +6,7 @@ const config = require('config');
 
 router.post('/', async (req, res) => {
   const user = farmer.findOne({ name: req.body.name });
-  const data = { name: req.body.name, aadharnumber: req.body.aadhar };
+  const data = { name: req.body.name, aadharnumber: req.body.aadhar, phone: req.body.phone };
   const newuser = new farmer(data);
   await newuser.save();
   console.log(newuser);
@@ -16,5 +16,9 @@ router.post('/', async (req, res) => {
     .header('access-control-expose-headers', 'x-auth-token')
     .send(newuser);
 });
+
+router.get('/', (req, res) => {
+  res.render('farmerregister')
+})
 
 module.exports = router;
