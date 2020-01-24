@@ -40,14 +40,14 @@
       </thead>
       <tbody>
 
-for(var i=0;i<ur.crop.length;i++){
-  <tr>
+<% for(var i=0;i<ur.crop.length;i++){ %>
+   <tr>
     <td><%=ur.crop[i].name%></td>
       <td><%=ur.crop[i].price%></td>
       <td><%=ur.crop[i].quantity%></td>
 
     </tr>
-}
+<% } %>
 
 
       </tbody>
