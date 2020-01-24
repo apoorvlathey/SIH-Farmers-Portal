@@ -6,7 +6,11 @@ const config = require('config');
 
 router.post('/', async (req, res) => {
   const user = farmer.findOne({ name: req.body.name });
-  const data = { name: req.body.name, aadharnumber: req.body.aadhar, phone: req.body.phone };
+  const data = {
+    name: req.body.name,
+    aadharnumber: req.body.aadhar,
+    phone: req.body.phone,
+  };
   const newuser = new farmer(data);
   await newuser.save();
   console.log(newuser);
@@ -14,11 +18,11 @@ router.post('/', async (req, res) => {
   res
     .header('x-auth-token', token)
     .header('access-control-expose-headers', 'x-auth-token')
-    .send(newuser);
+    .render('login');
 });
 
 router.get('/', (req, res) => {
-  res.render('farmerregister')
-})
+  res.render('farmerregister');
+});
 
 module.exports = router;
