@@ -32,4 +32,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', (req, res) => {
+  res.render('buyerregister')
+})
+
 module.exports = router;
