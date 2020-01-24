@@ -26,13 +26,12 @@ router.post('/', async (req, res) => {
           } else {
             if (!foundFarmers) {
               console.log('No Buyer And Farmer Exist');
-              res.render('register');
+              res.send('success');
             } else {
               //  console.log(foundClass.title);
-              console.log(foundFarmers);
               asd = foundFarmers;
               const token = jwt.sign(
-                foundFarmers.name,
+                foundFarmers.aadharnumber,
                 config.get('jwtPrivateKey')
               );
 
