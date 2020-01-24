@@ -48,7 +48,6 @@ app.use('/farmerCrop', cropUpdation);
 app.use('/login', login);
 app.use('/buyerregister', buyerRoute);
 app.use('/farmerregister', farmerRoute);
-
 app.get('/:id/:id2', (req, res) => {
   console.log(req.params.id2);
   if (req.params.id2) {
@@ -57,10 +56,18 @@ app.get('/:id/:id2', (req, res) => {
     console.log(req.params.id);
     const data = JSON.parse(string);
     console.log(typeof data);
-    res.render(req.params.id, { ur: data });
+    res.render(req.params.id, { ur: data, tyu: data });
   }
 });
-app.get('/:id', (req, res) => {
+app.get('/:id', auth, async (req, res) => {
+  console.log(req.body.aadharnumber);
+  const foundFarmers = await Farmer.findOne({
+    aadharnumber: req.body.aadharnumber,
+  });
+  console.log(req.params.id);
+  if (foundFarmers) {
+    res.send(foundFarmers);
+  }
   res.render(req.params.id);
 });
 
@@ -79,13 +86,14 @@ app.post('/register', function(req, res) {
   }
 });
 
-app.post('/update', function(req, res) {
+app.post('/update', auth, async function(req, res) {
   console.log(req.body.cropname);
   console.log(req.body.quantity);
   console.log(req.body.price);
+  console.log(req.body.aadharnumber);
 
-  Farmer.updateOne(
-    { aadharnumber: ur.aadharnumber },
+  const promise = Farmer.updateOne(
+    { aadharnumber: req.body.aadharnumber },
     {
       $push: {
         crop: {
@@ -103,8 +111,10 @@ app.post('/update', function(req, res) {
       },
     }
   );
-
-  res.render('details', { ur: foundFarmers });
+  promise.then(() => {
+    console.log('sajkdbhsajkd');
+    res.redirect('/details');
+  });
 });
 
 app.listen(3001, function() {
