@@ -99,14 +99,14 @@
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url(images/product-5.jpg);"></div></td>
 
 						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
+						        	<h3>Tomato</h3>
+						        	<!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
 						        </td>
 
-						        <td class="price">$4.90</td>
+						        <td class="price">₹30</td>
 
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -114,7 +114,7 @@
 					          	</div>
 					          </td>
 
-						        <td class="total">$4.90</td>
+						        <td class="total">₹30</td>
 						      </tr><!-- END TR-->
 
 						      <tr class="text-center">
@@ -124,10 +124,10 @@
 
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
+						        	<!-- <p>Far far away, behind the word mountains, far from the countries</p> -->
 						        </td>
 
-						        <td class="price">$15.70</td>
+						        <td class="price">₹15.70</td>
 
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -135,7 +135,7 @@
 					          	</div>
 					          </td>
 
-						        <td class="total">$15.70</td>
+						        <td class="total">₹15.70</td>
 						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
@@ -143,77 +143,13 @@
     			</div>
     		</div>
     		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Estimate shipping and tax</h3>
-    					<p>Enter your destination to get a shipping estimate</p>
-  						<form action="#" class="info">
-	              <div class="form-group">
-	              	<label for="">Country</label>
-	                <input type="text" class="form-control text-left px-3" placeholder="">
-	              </div>
-	              <div class="form-group">
-	              	<label for="country">State/Province</label>
-	                <input type="text" class="form-control text-left px-3" placeholder="">
-	              </div>
-	              <div class="form-group">
-	              	<label for="country">Zip/Postal Code</label>
-	                <input type="text" class="form-control text-left px-3" placeholder="">
-	              </div>
-	            </form>
-    				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
-    			</div>
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Cart Totals</h3>
-    					<p class="d-flex">
-    						<span>Subtotal</span>
-    						<span>$20.60</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Delivery</span>
-    						<span id="delivery-price">0.00</span>
-							</p>
-							<hr>
-    					<p class="d-flex total-price">
-    						<span>Total</span>
-    						<span>$17.60</span>
-    					</p>
-    				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
+    			<p style="text-align: center;	margin-right: 30em;	margin-top: 1.5em;"><a style="color: white" onclick="checkout()" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
     		</div>
 			</div>
 		</section>
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
     <footer class="ftco-footer ftco-section">
       <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
@@ -340,8 +276,15 @@
 			if($('#type').val() == "ips")
 				$("#delivery-price").text('₹'+ 100)
 			else
-			$("#delivery-price").text('₹'+ 0)
+				$("#delivery-price").text('₹'+ 0)
 		});
+
+		function checkout() {
+			if($('#type').val() == "ips")
+				window.location = '/checkout'
+			else
+				alert('Order Details have been sent to the farmer')
+		}
 	</script>
 
   </body>
