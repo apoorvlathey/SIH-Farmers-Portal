@@ -41,6 +41,10 @@ app.get('/shop', function (req, res) {
   res.render('shop');
 });
 
+app.get('/cart', function (req, res) {
+  res.render('cart');
+});
+
 app.get('/update', function (req, res) {
   res.render('update', { tyu: tin });
 });
@@ -50,6 +54,13 @@ app.use('/farmerCrop', cropUpdation);
 app.use('/login', login);
 app.use('/buyerregister', buyerRoute);
 app.use('/farmerregister', farmerRoute);
+
+app.get('/bidding/:id', (req, res) => {
+  res.render('bidding', {
+    auctionId: req.params.id
+  })
+})
+
 app.get('/:id/:id2', (req, res) => {
   console.log(req.params.id2);
   if (req.params.id2) {
@@ -60,12 +71,6 @@ app.get('/:id/:id2', (req, res) => {
   }
   res.render(req.params.id);
 });
-
-app.get('/bidding/:id', (req, res) => {
-  res.render('bidding', {
-    auctionId: req.params.id
-  })
-})
 
 app.get('/register', (req, res) => {
   res.render('register')
@@ -109,7 +114,7 @@ app.post('/update', function (req, res) {
 });
 
 app.post('/sendtokens', (req, res) => {
-  const sendAmt = body;
+  const sendAmt = body.body.amt;
   var toAddress = req.body.addr;
   web3js = new web3(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/1dc641a8f6b046aabe9fb3d587984e30"))
 

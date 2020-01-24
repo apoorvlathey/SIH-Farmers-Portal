@@ -7,7 +7,7 @@ const FarmerSchema = new mongoose.Schema({
   phone: { type: Number, require: true },
   crop: [
     {
-      id: { type: Number, require: true },
+      auctionId: { type: Number, require: true },
       name: String,
       quantity: Number,
       price: Number,
