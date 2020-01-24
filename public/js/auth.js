@@ -28,7 +28,10 @@ document
       localStorage.setItem('token', createUser.headers['x-auth-token']);
       console.log(typeof createUser.data);
       const data = JSON.stringify(createUser.data);
-      console.log(typeof data);
-      window.location = `/details/+${data}`;
+      if (createUser.data === 'success') window.location = `/login`;
+      else {
+        console.log(data);
+        window.location = `/details/+${data}`;
+      }
     }
   });

@@ -1,45 +1,10 @@
 <!DOCTYPE html>
 <html><head>
-<title>e-learn</title>
+<title>Details</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="HTML KickStart is a ultra–lean set of HTML5, CSS, and jQuery (javascript) files, layouts, and elements designed to give you a headstart and save you a lot of hours on your next web project." />
-<meta name="copyright" content="Joshua Gatcke 99lime.com All Rights Reserved" />
-<!-- <link rel="stylesheet" type="text/css" href="/css/kickstart.css" media="all" /> -->
-                <!-- KICKSTART -->
 
-
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <script src="https://apis.google.com/js/api:client.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-                  <!-- CUSTOM STYLES -->
-<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src=kickstart.js"></script>
-
-<link rel="stylesheet" type="text/css" href="/css/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="/css/bootstrap-social.css" media="all" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">                         <!-- KICKSTART --> --> -->
-</head>
-<body>
-  <ul class="menu">
-  <li class="current"><a href="">Home</a></li>
-  </ul>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-9 ">
-  <h3><%=ur.name%>'s Crops</h3>
-  <table cellspacing="0" cellpadding="0">
-    <thead>
-      <tr>
-        <th>Crop Name</th>
-          <th>Quantity</th>
-          <th>Price/Kg</th>
-        </tr>
-      </thead>
-      <tbody>
-
+<<<<<<< HEAD
 <% for(var i=0;i<ur.crop.length;i++){ %>
    <tr>
     <td><%=ur.crop[i].name%></td>
@@ -48,61 +13,104 @@
 
     </tr>
 <% } %>
+=======
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<title>Kisan Vetan Vriddhi</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+>>>>>>> 9e9c8d77cfba3b0c703e5cf4cab6adf99fefa6a8
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
 
 
-      </tbody>
-</table>
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
+  <body class="goto-here">
 
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="/">Kisan Vetan Vriddhi</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <a class="dropdown-item" href="/shop">Shop</a>
+
+                  <a class="dropdown-item" href="/product-single">Single Product</a>
+                  <a class="dropdown-item" href="/cart">Cart</a>
+                  <a class="dropdown-item" href="/checkout">Checkout</a>
+                </div>
+              </li>
+              <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+              <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9 ">
+  <h2><%=ur.name%>'s Crops</h2>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Cropname</th>
+        <th>Quantity</th>
+        <th>Price/Kg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% for(var i=0;i<ur.crop.length;i++){ %>
+           <tr>
+            <td><%=ur.crop[i].name%></td>
+              <td><%=ur.crop[i].price%></td>
+              <td><%=ur.crop[i].quantity%></td>
+
+            </tr>
+        <% } %>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
-
-
-
-
-
-<div class="col-3">
-	<h4>Swagat</h4>
-	<p><a class="button" href="/update">Add A crop</a></p>
+<div class="col-lg-3">
+<h4>Swagat</h4>
+<p><a class="button" href="/update">Add A crop</a></p>
 
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="clear"></div>
-	<div id="footer">
-	&copy; Copyright 2019 All Rights Reserved.Made by Harsh Singhal
-	</div>
-
-	<!-- <script type="text/javascript">
-
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-1641401-6']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-
-	</script> -->
-
-	</body></html>
+</body>
+</html>
