@@ -48,17 +48,21 @@ app.use('/farmerCrop', cropUpdation);
 app.use('/login', login);
 app.use('/buyerregister', buyerRoute);
 app.use('/farmerregister', farmerRoute);
+
 app.get('/:id/:id2', (req, res) => {
   console.log(req.params.id2);
   if (req.params.id2) {
     const string = req.params.id2.substring(1);
     console.log(string);
+    console.log(req.params.id);
     const data = JSON.parse(string);
+    console.log(typeof data);
     res.render(req.params.id, { ur: data });
   }
+});
+app.get('/:id', (req, res) => {
   res.render(req.params.id);
 });
-
 app.post('/register', function(req, res) {
   var t = req.body.type;
   console.log(req.body);
