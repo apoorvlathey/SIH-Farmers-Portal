@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 
 const FarmerSchema = new mongoose.Schema({
   name: { type: String, require: true },
+  id: { type: Number, require: true },
   aadharnumber: { type: String, require: true, unique: true },
+  phone: { type: Number, require: true },
   crop: [
     {
+      id: { type: Number, require: true },
       name: String,
       quantity: Number,
       price: Number,

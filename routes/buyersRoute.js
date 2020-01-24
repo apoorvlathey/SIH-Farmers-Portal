@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     const data = {
       name: req.body.name,
       aadhar: req.body.aadhar,
-      password: req.body.password,
+      phone: req.body.phone,
       email: req.body.email,
     };
     const newuser = new buyer(data);
