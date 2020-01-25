@@ -24,11 +24,15 @@ router.post('/', async (req, res) => {
   qty = trimmed[2]
   price = trimmed[3]
 
-  await axios.post('/update', {
-    cropname: cropname,
-    qty: qty,
-    price: price
-  })
+  try {
+    await axios.post('/update', {
+      cropname: cropname,
+      qty: qty,
+      price: price
+    })
+  } catch (e){
+    console.log
+  }
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
