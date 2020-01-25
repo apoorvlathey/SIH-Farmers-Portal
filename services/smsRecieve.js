@@ -2,7 +2,7 @@ const router = require('express').Router();
 const axios = require('axios')
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
   if (req.body.Body == 'hello') {
