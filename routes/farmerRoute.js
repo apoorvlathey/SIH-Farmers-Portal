@@ -12,6 +12,8 @@ router.post('/', async (req, res) => {
     phone: req.body.phone,
   };
   const newuser = new farmer(data);
+  console.log(req.body);
+
   await newuser.save();
   console.log(newuser);
   const token = jwt.sign({ id: newuser._id }, config.get('jwtPrivateKey'));

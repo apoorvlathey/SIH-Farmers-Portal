@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 mongoose
   .connect(
-    'mongodb+srv://rachit2501:owasp123@cluster0-oh5ch.mongodb.net/test?retryWrites=true&w=majority://localhost:27017/sihDB',
+    'mongodb+srv://rachit2501:owasp123@cluster0-oh5ch.mongodb.net/test?retryWrites=true://localhost:27017/sihDB',
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
