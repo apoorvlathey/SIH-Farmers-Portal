@@ -292,6 +292,10 @@
           $("#highest-bidder-addr").text(res.highestBidder)
         }
 
+        if(res.highestBidder == "0x0000000000000000000000000000000000000000") {
+          $("#highest-bidder-addr").text("Bidding Not Started")
+        }
+
         $("#farmer-id").text(res.farmerId)
         $("#auction-ends").text(timeConverter(parseInt(res.startTime) + 24*60*60))
 
