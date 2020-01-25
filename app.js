@@ -10,7 +10,7 @@ const Farmer = require('./models/farmerSchema');
 const Auction = require('./models/auctions');
 const buyerRoute = require('./routes/buyersRoute');
 const cropUpdation = require('./routes/cropUpdation');
-//const sms = require('./services/sms');
+const sms = require('./services/sms');
 const login = require('./routes/login');
 const web3 = require('web3');
 const Tx = require('ethereumjs-tx');
@@ -47,7 +47,7 @@ const au = new Auction({
 });
 
 //au.save();
-
+app.use('/sendSms' , sms);
 app.use('/sms', smsRecieve);
 app.get('/', function(req, res) {
   res.render('index');
