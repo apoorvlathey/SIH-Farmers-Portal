@@ -118,7 +118,7 @@ app.post('/register', function(req, res) {
   }
 });
 
-app.post('/update', auth, async function(req, res) {
+app.post('/update', async function(req, res) {
   console.log(req.body.cropname);
   console.log(req.body.quantity);
   console.log(req.body.price);
