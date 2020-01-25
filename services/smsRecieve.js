@@ -27,8 +27,8 @@ router.post('/', async (req, res) => {
   try {
     await axios.post('/update', {
       cropname: cropname,
-      qty: qty,
-      price: price
+      quantity: parseInt(qty),
+      price: parseInt(price)
     })
   } catch (e){
     console.log
