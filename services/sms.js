@@ -8,7 +8,7 @@ var client = new twilio(
 client.messages
   .create({
     from: '+12019879983',
-    to: '+917071690418',
-    body: 'create using callback',
+    to: '+918510946270',
+    body: 'Your OTP: 745201',
   })
   .then(message => console.log(message));
