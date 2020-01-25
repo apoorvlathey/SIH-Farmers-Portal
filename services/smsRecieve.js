@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const axios = require('axios')
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 router.post('/', (req, res) => {
@@ -14,6 +15,21 @@ router.post('/', (req, res) => {
     );
   }
   console.log(req.body);
+
+  var msg = req.body.Body
+  var trimmed = msg.replace(/^\s+|\s+$/g, '');
+  trimmed = msg.split(" ")
+
+  cropname = trimmed[1]
+  qty = trimmed[2]
+  price = trimmed[3]
+
+  await axios.post('/update', {
+    cropname: cropname,
+    qty: qty,
+    price: price
+  })
+
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
 });
