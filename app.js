@@ -7,7 +7,7 @@ const farmerRoute = require('./routes/farmerRoute');
 const app = express();
 const Buyer = require('./models/buyerSchema');
 const Farmer = require('./models/farmerSchema');
-const Auction = require('./models/auctions')
+const Auction = require('./models/auctions');
 const buyerRoute = require('./routes/buyersRoute');
 const cropUpdation = require('./routes/cropUpdation');
 //const sms = require('./services/sms');
@@ -43,10 +43,10 @@ mongoose
 var tin = [];
 
 const au = new Auction({
-  count: 2
-})
+  count: 3,
+});
 
-// au.save()
+//au.save();
 
 app.use('/sms', smsRecieve);
 app.get('/', function(req, res) {
@@ -118,7 +118,7 @@ app.post('/register', function(req, res) {
   }
 });
 
-app.post('/update', auth, async function (req, res) {
+app.post('/update', auth, async function(req, res) {
   console.log(req.body.cropname);
   console.log(req.body.quantity);
   console.log(req.body.price);
@@ -127,40 +127,269 @@ app.post('/update', auth, async function (req, res) {
   var auctionId = 0;
 
   //blockchain save
-  web3js = new web3(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/1dc641a8f6b046aabe9fb3d587984e30"))
+  web3js = new web3(
+    new web3.providers.HttpProvider(
+      'https://rinkeby.infura.io/v3/1dc641a8f6b046aabe9fb3d587984e30'
+    )
+  );
 
   var myAddress = '4E04768CDD20e35EE87e6a89fC5B920f9492ffC5';
-  var privateKey = Buffer.from('8B090EB2E3D9AF5068B819FFBFC0EC07BF17484F0BC2977BFC6EE13BB61DE596', 'hex')
+  var privateKey = Buffer.from(
+    '8B090EB2E3D9AF5068B819FFBFC0EC07BF17484F0BC2977BFC6EE13BB61DE596',
+    'hex'
+  );
 
   //contract abi is the array that you can get from the ethereum wallet or etherscan
-  var contractABI = [{ "inputs": [{ "internalType": "address", "name": "_tokenContractAddress", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "AuctonId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "timeCreated", "type": "uint256" }], "name": "AuctionCreated", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "highestBidder", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "AuctionEndTime", "type": "uint256" }], "name": "BidPlaced", "type": "event" }, { "constant": true, "inputs": [], "name": "ERC20Interface", "outputs": [{ "internalType": "contract ERC20", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "auctions", "outputs": [{ "internalType": "uint256", "name": "auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "cropId", "type": "uint256" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "enum Bidding.auctionState", "name": "state", "type": "uint8" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "buyerBids", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "farmerAuctions", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "getHighestBid", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_farmerId", "type": "uint256" }, { "internalType": "uint256", "name": "_basePricePerKg", "type": "uint256" }, { "internalType": "uint256", "name": "_cropId", "type": "uint256" }], "name": "newAuction", "outputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }, { "internalType": "uint256", "name": "_bidAmt", "type": "uint256" }], "name": "placeBid", "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }], "name": "tranferContractTokens", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_auctionId", "type": "uint256" }], "name": "withdrawTokensAfterAuctionEnded", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }];
-  var contractAddress = "0xa6EB5e3512421209a24A38b6b487B5846321bB85";
+  var contractABI = [
+    {
+      inputs: [
+        {
+          internalType: 'address',
+          name: '_tokenContractAddress',
+          type: 'address',
+        },
+      ],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'AuctonId',
+          type: 'uint256',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'farmerId',
+          type: 'uint256',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'basePricePerKg',
+          type: 'uint256',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'cropId',
+          type: 'uint256',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'timeCreated',
+          type: 'uint256',
+        },
+      ],
+      name: 'AuctionCreated',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: 'address',
+          name: 'highestBidder',
+          type: 'address',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'highestBid',
+          type: 'uint256',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'AuctionEndTime',
+          type: 'uint256',
+        },
+      ],
+      name: 'BidPlaced',
+      type: 'event',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'ERC20Interface',
+      outputs: [{ internalType: 'contract ERC20', name: '', type: 'address' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      name: 'auctions',
+      outputs: [
+        { internalType: 'uint256', name: 'auctionId', type: 'uint256' },
+        { internalType: 'uint256', name: 'farmerId', type: 'uint256' },
+        { internalType: 'uint256', name: 'basePricePerKg', type: 'uint256' },
+        { internalType: 'uint256', name: 'cropId', type: 'uint256' },
+        { internalType: 'uint256', name: 'startTime', type: 'uint256' },
+        { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+        {
+          internalType: 'enum Bidding.auctionState',
+          name: 'state',
+          type: 'uint8',
+        },
+        { internalType: 'uint256', name: 'highestBid', type: 'uint256' },
+        { internalType: 'address', name: 'highestBidder', type: 'address' },
+      ],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [
+        { internalType: 'uint256', name: '', type: 'uint256' },
+        { internalType: 'address', name: '', type: 'address' },
+      ],
+      name: 'buyerBids',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [
+        { internalType: 'uint256', name: '', type: 'uint256' },
+        { internalType: 'uint256', name: '', type: 'uint256' },
+      ],
+      name: 'farmerAuctions',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [
+        { internalType: 'uint256', name: '_auctionId', type: 'uint256' },
+      ],
+      name: 'getHighestBid',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { internalType: 'uint256', name: '_farmerId', type: 'uint256' },
+        { internalType: 'uint256', name: '_basePricePerKg', type: 'uint256' },
+        { internalType: 'uint256', name: '_cropId', type: 'uint256' },
+      ],
+      name: 'newAuction',
+      outputs: [
+        { internalType: 'uint256', name: '_auctionId', type: 'uint256' },
+      ],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'owner',
+      outputs: [{ internalType: 'address', name: '', type: 'address' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { internalType: 'uint256', name: '_auctionId', type: 'uint256' },
+        { internalType: 'uint256', name: '_bidAmt', type: 'uint256' },
+      ],
+      name: 'placeBid',
+      outputs: [{ internalType: 'bool', name: 'success', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { internalType: 'address', name: '_to', type: 'address' },
+        { internalType: 'uint256', name: '_amt', type: 'uint256' },
+      ],
+      name: 'tranferContractTokens',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
+      name: 'transferOwnership',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { internalType: 'uint256', name: '_auctionId', type: 'uint256' },
+      ],
+      name: 'withdrawTokensAfterAuctionEnded',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+  ];
+  var contractAddress = '0xa6EB5e3512421209a24A38b6b487B5846321bB85';
   //creating contract object
   var contract = new web3js.eth.Contract(contractABI, contractAddress);
 
   var count;
   // get transaction count, later will used as nonce
-  web3js.eth.getTransactionCount(myAddress).then(function (v) {
-    console.log("Count: " + v);
+  web3js.eth.getTransactionCount(myAddress).then(function(v) {
+    console.log('Count: ' + v);
     count = v;
     var amount = web3js.utils.toHex(1e16);
     //creating raw tranaction
-    var rawTransaction = { "from": myAddress, "gasPrice": web3js.utils.toHex(20 * 1e9), "gasLimit": web3js.utils.toHex(210000), "to": contractAddress, "value": "0x0", "data": contract.methods.newAuction(2, req.body.price, 3).encodeABI(), "nonce": web3js.utils.toHex(count) }
+    var rawTransaction = {
+      from: myAddress,
+      gasPrice: web3js.utils.toHex(20 * 1e9),
+      gasLimit: web3js.utils.toHex(210000),
+      to: contractAddress,
+      value: '0x0',
+      data: contract.methods.newAuction(2, req.body.price, 3).encodeABI(),
+      nonce: web3js.utils.toHex(count),
+    };
     console.log(rawTransaction);
     //creating transaction via ethereumjs-tx
     var transaction = new Tx(rawTransaction);
     //signing transaction with private key
     transaction.sign(privateKey);
     //sending transacton via web3js module
-    web3js.eth.sendSignedTransaction('0x' + transaction.serialize().toString('hex'))
+    web3js.eth
+      .sendSignedTransaction('0x' + transaction.serialize().toString('hex'))
       .on('transactionHash', console.log);
 
     // contract.methods.balanceOf(myAddress).call()
     //   .then(function (balance) { console.log(balance) });
-  })
+  });
 
-  Auction.findOne({}, {}, { sort: { 'created_at': -1 } }, function (err, post) {
-    auctionId = post.count
+  await Auction.findOne({}, {}, { sort: { created_at: -1 } }, function(
+    err,
+    post
+  ) {
+    auctionId = post.count;
     const promise = Farmer.updateOne(
       { aadharnumber: req.body.aadharnumber },
       {
@@ -186,7 +415,10 @@ app.post('/update', auth, async function (req, res) {
       res.redirect('/details');
     });
   });
-
+  const countUpdate = await Auction.findById('5e2be425cece281c2d5236b6');
+  console.log(countUpdate);
+  countUpdate.count += 1;
+  await countUpdate.save();
 });
 
 app.post('/sendtokens', (req, res) => {
@@ -205,8 +437,199 @@ app.post('/sendtokens', (req, res) => {
   );
 
   //contract abi is the array that you can get from the ethereum wallet or etherscan
-  var contractABI = [{ "constant": true, "inputs": [], "name": "name", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "approve", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "biddingContractAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_from", "type": "address" }, { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [{ "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_value", "type": "uint256" }], "name": "burn", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_contractAddress", "type": "address" }], "name": "setContractAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "", "type": "address" }], "name": "balanceOf", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_target", "type": "address" }, { "name": "_mintedAmount", "type": "uint256" }], "name": "mintToken", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "transfer", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newOwner", "type": "address" }], "name": "transerOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "", "type": "address" }, { "name": "", "type": "address" }], "name": "allowance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [{ "name": "tokenName", "type": "string" }, { "name": "tokenSymbol", "type": "string" }, { "name": "initialSupply", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_from", "type": "address" }, { "indexed": true, "name": "_to", "type": "address" }, { "indexed": false, "name": "tokens", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_tokenOwner", "type": "address" }, { "indexed": true, "name": "_spender", "type": "address" }, { "indexed": false, "name": "tokens", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_from", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" }], "name": "Burn", "type": "event" }];
-  var contractAddress = "0x2E82e2858357F5eaCe2ffA64da3eeF0661Ed4691";
+  var contractABI = [
+    {
+      constant: true,
+      inputs: [],
+      name: 'name',
+      outputs: [{ name: '', type: 'string' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { name: '_spender', type: 'address' },
+        { name: '_value', type: 'uint256' },
+      ],
+      name: 'approve',
+      outputs: [{ name: 'success', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'biddingContractAddress',
+      outputs: [{ name: '', type: 'address' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'totalSupply',
+      outputs: [{ name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { name: '_from', type: 'address' },
+        { name: '_to', type: 'address' },
+        { name: '_value', type: 'uint256' },
+      ],
+      name: 'transferFrom',
+      outputs: [{ name: 'success', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'decimals',
+      outputs: [{ name: '', type: 'uint8' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [{ name: '_value', type: 'uint256' }],
+      name: 'burn',
+      outputs: [{ name: 'success', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [{ name: '_contractAddress', type: 'address' }],
+      name: 'setContractAddress',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [{ name: '', type: 'address' }],
+      name: 'balanceOf',
+      outputs: [{ name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { name: '_target', type: 'address' },
+        { name: '_mintedAmount', type: 'uint256' },
+      ],
+      name: 'mintToken',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'owner',
+      outputs: [{ name: '', type: 'address' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'symbol',
+      outputs: [{ name: '', type: 'string' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [
+        { name: '_to', type: 'address' },
+        { name: '_value', type: 'uint256' },
+      ],
+      name: 'transfer',
+      outputs: [{ name: 'success', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: false,
+      inputs: [{ name: 'newOwner', type: 'address' }],
+      name: 'transerOwnership',
+      outputs: [],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      constant: true,
+      inputs: [
+        { name: '', type: 'address' },
+        { name: '', type: 'address' },
+      ],
+      name: 'allowance',
+      outputs: [{ name: '', type: 'uint256' }],
+      payable: false,
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        { name: 'tokenName', type: 'string' },
+        { name: 'tokenSymbol', type: 'string' },
+        { name: 'initialSupply', type: 'uint256' },
+      ],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        { indexed: true, name: '_from', type: 'address' },
+        { indexed: true, name: '_to', type: 'address' },
+        { indexed: false, name: 'tokens', type: 'uint256' },
+      ],
+      name: 'Transfer',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        { indexed: true, name: '_tokenOwner', type: 'address' },
+        { indexed: true, name: '_spender', type: 'address' },
+        { indexed: false, name: 'tokens', type: 'uint256' },
+      ],
+      name: 'Approval',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        { indexed: true, name: '_from', type: 'address' },
+        { indexed: false, name: '_value', type: 'uint256' },
+      ],
+      name: 'Burn',
+      type: 'event',
+    },
+  ];
+  var contractAddress = '0x2E82e2858357F5eaCe2ffA64da3eeF0661Ed4691';
   //creating contract object
   var contract = new web3js.eth.Contract(contractABI, contractAddress);
 
